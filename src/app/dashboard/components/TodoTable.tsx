@@ -13,19 +13,35 @@ interface UserData {
 export default function TodoTable() {
   const router = useRouter();
   const [user, setUser] = useState<UserData | null>(null);
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
-
-  const { todos, loading, error } = useTodo(token || "");
-
+  const [token, setToken] = useState<string | null>(null);
+  const [role, setRole] = useState<string | null>(null);
   const [search, setSearch] = useState("");
-  const [filterStatus, setFilterStatus] = useState<"Success" | "Pending" | "">("");
+  const [filterStatus, setFilterStatus] = useState<"Success" | "Pending" | "">(
+    ""
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const todosPerPage = 5;
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("role");
+
+    if (!storedToken || storedRole !== "ADMIN") {
+      router.replace("/login");
+    } else {
+      setToken(storedToken);
+      setRole(storedRole);
+      const fullName = localStorage.getItem("fullName");
+      setUser({ fullName: fullName || "Admin", role: storedRole });
+    }
+  }, [router]);
+
+  const { todos, loading, error } = useTodo(token || "");
   // Filter & pagination
   const filteredTodos = todos.filter((todo) => {
-    const matchesSearch = todo.item.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch = todo.item
+      .toLowerCase()
+      .includes(search.toLowerCase());
     const matchesStatus = filterStatus
       ? todo.isDone === (filterStatus === "Success")
       : true;
@@ -37,21 +53,11 @@ export default function TodoTable() {
     currentPage * todosPerPage
   );
 
-  useEffect(() => {
-    if (!token || role !== "ADMIN") {
-      router.replace("/login");
-    } else {
-      const fullName = localStorage.getItem("fullName");
-      setUser({ fullName: fullName || "Admin", role });
-    }
-  }, [router, token, role]);
-
   return (
     <div className="bg-white rounded-lg shadow p-5 mt-5">
       {/* Toolbar */}
       <div className="flex justify-between items-center mb-4 flex-wrap gap-3">
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center flex-wrap">
-
           <div className="relative w-64">
             <Iconify
               icon="ic:round-search"

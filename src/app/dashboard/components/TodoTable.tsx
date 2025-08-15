@@ -54,7 +54,7 @@ export default function TodoTable() {
   );
 
   return (
-    <div className="bg-white rounded-lg shadow p-5 mt-5">
+    <div className="bg-white min-h-screen rounded-lg shadow p-5 mt-5">
       {/* Toolbar */}
       <div className="flex justify-between items-center mb-4 flex-wrap gap-3">
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center flex-wrap">
@@ -102,12 +102,12 @@ export default function TodoTable() {
       </div>
 
       {/* Table */}
-      <table className="w-full text-left border-collapse">
+      <table className="w-full text-left border-collapse overflow-x-auto">
         <thead className="bg-[#F9F9F9]">
           <tr>
-            <th className="border-b p-2">Name</th>
-            <th className="border-b p-2">To do</th>
-            <th className="border-b p-2">Status</th>
+           <th className="border-b p-2 text-sm md:text-base">Name</th>
+        <th className="border-b p-2 text-sm md:text-base">To do</th>
+        <th className="border-b p-2 text-sm md:text-base">Status</th>
           </tr>
         </thead>
         <tbody>

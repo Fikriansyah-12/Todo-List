@@ -57,20 +57,20 @@ export default function AddTodoPage() {
     }
   };
 
-  if (!token) return <p>Loading token...</p>;
+  if (!token) return <p className="text-center mt-10">Loading token...</p>;
 
   return (
-    <div className="w-full flex flex-col items-center ">
+    <div className="w-full flex flex-col items-center px-4 sm:px-6 lg:px-8">
       <Toaster position="top-right" richColors />
 
-      <h1 className="text-4xl text-primaryBlue font-bold mb-8 flex items-center gap-3">
+      <h1 className="text-3xl sm:text-4xl text-primaryBlue font-bold mb-8 flex items-center gap-3">
         TO DO
       </h1>
 
-      <div className="w-1/2 p-6 bg-white rounded-2xl shadow-lg">
+      <div className="w-full sm:w-4/5 md:w-2/3 lg:w-1/2 p-4 sm:p-6 bg-white rounded-2xl shadow-lg">
         <h2 className="text-gray-600 font-semibold mb-2">Add a new task</h2>
 
-        <div className="flex gap-4 mb-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4">
           <Input
             placeholder="Add Todo"
             value={task}
@@ -78,7 +78,7 @@ export default function AddTodoPage() {
             className="w-full border rounded-lg px-4 py-2"
           />
           <Button
-            className="bg-primaryBlue w-1/3 hover:bg-blue-700 transition"
+            className="bg-primaryBlue w-full sm:w-1/3 hover:bg-blue-700 transition"
             onClick={handleAddTodo}
             disabled={adding}
           >
@@ -106,7 +106,7 @@ export default function AddTodoPage() {
                     }
                     className="w-5 h-5"
                   />
-                  <span>{todo.item}</span>
+                  <span className="break-words">{todo.item}</span>
                 </div>
 
                 <div className="flex items-center gap-2">

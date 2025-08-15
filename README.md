@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NodeWave Front End Assessment - Todo App
 
-## Getting Started
+This is a **Simple Todo Application** built as part of the NodeWave Front End Candidate Assessment.
 
-First, run the development server:
+## 🚀 Features
+
+### Mandatory Features
+- **Login** with email or username
+- **Register** a new user
+- **Create New Todo**
+- **Mark Todo as Done / Undone**
+- **Delete Todo**
+- **Get All Todos**
+- **Apply Filters** on the list of Todos
+
+### Optional Features (Admin Page)
+- View **all todos**, including user information
+- **Filtering and Pagination** for admin
+
+## 💻 Technology Stack
+- **Framework:** Next.js (TypeScript)
+- **CSS / UI Kit:** Tailwind CSS + Shadcn UI
+- **Libraries:** React Query, Zod, Zustand, Axios, Clsx, Date-fns, Sonner
+- **Animations:** Framer Motion
+- **Notifications:** Sonner
+
+## 🛠 Installation & Running Locally
 
 ```bash
+# Clone the repository
+git clone <your-repo-url>
+cd <repo-folder>
+
+# Install dependencies
+npm install
+# or
+pnpm install
+
+# Run development server
 npm run dev
 # or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Todo-List

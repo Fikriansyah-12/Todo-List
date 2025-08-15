@@ -42,33 +42,39 @@ export default function RegisterPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    const parsed = registerSchema.safeParse(form);
-    if (!parsed.success) {
-      const errs: { [key: string]: string } = {};
-      parsed.error.issues.forEach((issue) => {
-        const key = issue.path?.[0];
-        if (key) errs[key.toString()] = issue.message;
-      });
-      setFormErrors(errs);
+  const parsed = registerSchema.safeParse(form);
+  if (!parsed.success) {
+    const errs: { [key: string]: string } = {};
+    parsed.error.issues.forEach((issue) => {
+      const key = issue.path?.[0];
+      if (key) errs[key.toString()] = issue.message;
+    });
+    setFormErrors(errs);
+    return;
+  }
 
-      setFormErrors(errs);
-      return;
+  const payload = {
+    fullName: `${form.firstName} ${form.lastName}`,
+    email: form.email,
+    password: form.password,
+  };
+
+  try {
+    const res = await register(payload); 
+    if (res?.content?.token) router.push("/login");
+
+    if (res?.content?.user?.fullName) {
+      localStorage.setItem("fullName", res.content.user.fullName);
     }
-const payload = {
-  fullName: `${form.firstName} ${form.lastName}`,
-  email: form.email,
-  password: form.password
+  } catch (err) {
+    console.error(err);
+    setFormErrors({ api: "Terjadi kesalahan saat register." });
+  }
 };
 
-
-const res = await register(payload);
-    if (res?.content?.token) router.push("/login");
-    console.log(payload,'test');
-    
-  };
 
   return (
     <Card className="w-full max-w-xl mx-auto mt-10">

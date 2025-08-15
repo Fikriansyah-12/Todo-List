@@ -1,8 +1,11 @@
-"use client";
-
 import { useState } from "react";
 import { post } from "@/lib/axios";
-import { RegisterInput } from "@/lib/validation/auth";
+
+export type ApiRegisterPayload = {
+  fullName: string;
+  email: string;
+  password: string;
+};
 
 export type RegisterResponse = {
   content: {
@@ -17,11 +20,11 @@ export function useRegister() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const register = async (data: RegisterInput) => {
+  const register = async (data: ApiRegisterPayload) => {
     try {
       setLoading(true);
       setError(null);
-      const res = await post<RegisterResponse, RegisterInput>("/register", data);
+      const res = await post<RegisterResponse, ApiRegisterPayload>("/register", data);
       return res;
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
